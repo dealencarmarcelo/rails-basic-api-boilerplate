@@ -23,6 +23,13 @@ module RailsApiBoilerplate
   class Application < Rails::Application
     config.load_defaults 6.1
 
+    config.i18n.default_locale = :"pt-BR"
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml").to_s]
+    
+    config.time_zone = 'UTC'
+    
+    config.autoload_paths += %W(#{config.root}/lib)
+
     config.api_only = true
   end
 end
