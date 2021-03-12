@@ -1,24 +1,37 @@
-# README
+## Rails - Basic API Boilerplate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Basic Rails API to exemplify TDD structure, model validations, controller methods and error handling.
 
-Things you may want to cover:
+> *The repository's purpose is to have a base and examples for creating endpoints with rspec using Rails.*
 
-* Ruby version
+#### Some informations and Gems
 
-* System dependencies
+> Ruby 2.7.2
+> 
+> Rails 6.1.3
+> 
+> Rspec-rails
+> 
+> Shoulda-matchers
+> 
+> Factory_bot_rails
+> 
+> Faker
 
-* Configuration
+#### Basic entities used
 
-* Database creation
+- **User**
+  - *Attributes*
+    - Name (string).
+    - Email (string).
+    - Password (string).
+  - Validations
+    - Name presence.
+    - Email format and presence.
+    - Password and password confirmation presence and length (at least 6).
 
-* Database initialization
+* *Pending authentication development*
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<p> <strong>It's useful?<strong><br><img src="https://media0.giphy.com/media/3o6vXNLzXdW4sbFRGo/giphy.gif?cid=ecf05e47ou51ktvj373on6qb55zmtxqp45nvy96ps2vd5zey&rid=giphy.gif" width="200" heigth="200">
+</p>
