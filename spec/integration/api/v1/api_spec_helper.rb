@@ -1,4 +1,4 @@
-module ApiSpecHelper
+require "spec_helper"
   def json
     JSON.parse(response.body)
   end
@@ -15,4 +15,3 @@ module ApiSpecHelper
   def json_errors
     json['errors']
   end
-end

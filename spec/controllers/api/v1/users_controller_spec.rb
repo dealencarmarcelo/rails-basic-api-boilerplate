@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe UsersController, type: :controller do 
+describe Api::V1::UsersController, type: :controller do 
   before do
     @user = FactoryBot.create(:user)
 
     password = Faker::Alphanumeric.alphanumeric(number: 8)
     @params = {
-      name: Faker::Name.full_name,
+      name: Faker::Name.name,
       email: Faker::Internet.email,
       password: password,
       password_confirmation: password
@@ -38,51 +38,42 @@ describe UsersController, type: :controller do
         post :create, params: @params
         expect(response).to have_http_status(:success)
       end
-      # it 'creates an user and return success' do
-      #   expect {
-      #     post :create, params: @params
-      #   }.to change { User.count }.by(1)
-      # end
     end
 
     context 'with invalid params' do
       it 'returns record invalid' do
         @params[:name] = nil
         post :create, params: @params
-        expect(response).to have_http_status(:record_invalid)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
-
-      # it 'does not create an user' do
-      #   expect {
-      #     post :create, params: @params
-      #   }.to_not change { User.count }.by(1)
-      # end
     end
   end
 
   describe '#update' do
     context 'with valid params' do
       it 'succeeds' do
-        @params[:name] = Faker::Name.full_name
-        post :update, params: @params
+        @params[:name] = Faker::Name.name
+        put :update, params: { id: @user.id }
         expect(response).to have_http_status(:success)
       end
-      # it 'update an user' do
-      #   @params[:name] = Faker::Name.full_name
-      #   post :update, params: @params
-      #   expect(json['name']).to eq(@params[:name])
-      # end
     end
 
     context 'with invalid params' do
       it 'returns not_found with invalid user' do
-        post :update, params: { id: 0, name: Faker::Name.full_name }
+        put :update, params: { id: 0, name: Faker::Name.name }
         expect(response).to have_http_status(:not_found)
       end
-      it 'returns record_invalid with nil attribute' do
+      it 'returns record_invalid with nil name' do
         @params[:name] = nil
-        post :update, params: @params
-        expect(response).to have_http_status(:record_invalid)
+        @params[:id] = @user.id
+        put :update, params: @params
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+      it 'returns record_invalid with nil email' do
+        @params[:email] = nil
+        @params[:id] = @user.id
+        put :update, params: @params
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -90,27 +81,16 @@ describe UsersController, type: :controller do
   describe '#destroy' do
     context 'with valid params' do
       it 'succeeds' do
-        post :destroy, params: { id: @params.id }
+        post :destroy, params: { id: @user.id }
         expect(response).to have_http_status(:no_content)
       end
-      # it 'destroy an user' do
-      #   expect {
-      #     post :create, params: @params
-      #   }.to change { User.count }.by(-1)
-      # end
     end
 
     context 'with invalid params' do
       it 'returns not_found' do
-        post :destroy, params: @params
+        post :destroy, params: { id: 0 }
         expect(response).to have_http_status(:not_found)
       end
-
-      # it 'does not destroy an user' do
-      #   expect {
-      #     post :create, params: @params
-      #   }.to_not change { User.count }.by(-1)
-      # end
     end
   end
 end
