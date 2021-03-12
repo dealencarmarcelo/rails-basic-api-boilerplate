@@ -2,7 +2,7 @@
 
 Basic Rails API to exemplify TDD structure, model validations, controller methods and error handling.
 
-> *The repository's purpose is to have a base and examples for creating endpoints with rspec using Rails.*
+> *The repository's purpose, besides learning, is to have a base and examples for creating endpoints with rspec using Rails.*
 
 #### Some informations and Gems
 
