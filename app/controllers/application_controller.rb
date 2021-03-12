@@ -20,8 +20,8 @@ class ApplicationController < ActionController::API
     error_details = { code: data[:code], message: data[:message] }
 
     error_details[:field] = data[:field] if data[:field].present?
-
-    render json: { errors: error_details, status: data[:status] }
+    
+    render json: { errors: error_details }, status: data[:status]
   end
 
   def handle_record_invalid(error)
@@ -36,6 +36,6 @@ class ApplicationController < ActionController::API
         error_list << hash
       end
     end
-    render json: { errors: error_list, status: :unprocessable_entity }
+    render json: { errors: error_list }, status: :unprocessable_entity
   end
 end
