@@ -41,7 +41,7 @@ describe Api::V1::UsersController, type: :controller do
     end
 
     context 'with invalid params' do
-      it 'returns record invalid' do
+      it 'returns unprocessable entity' do
         @params[:name] = nil
         post :create, params: @params
         expect(response).to have_http_status(:unprocessable_entity)
@@ -63,13 +63,13 @@ describe Api::V1::UsersController, type: :controller do
         put :update, params: { id: 0, name: Faker::Name.name }
         expect(response).to have_http_status(:not_found)
       end
-      it 'returns record_invalid with nil name' do
+      it 'returns unprocessable entity with nil name' do
         @params[:name] = nil
         @params[:id] = @user.id
         put :update, params: @params
         expect(response).to have_http_status(:unprocessable_entity)
       end
-      it 'returns record_invalid with nil email' do
+      it 'returns unprocessable entity with nil email' do
         @params[:email] = nil
         @params[:id] = @user.id
         put :update, params: @params
