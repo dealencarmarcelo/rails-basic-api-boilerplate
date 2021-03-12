@@ -36,6 +36,6 @@ class ApplicationController < ActionController::API
         error_list << hash
       end
     end
-    render json: { errors: error_list }, status: :unprocessable_entity
+    render json: { errors: error_list, status: :unprocessable_entity }
   end
 end
