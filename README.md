@@ -23,11 +23,11 @@ Basic Rails API to exemplify TDD structure, model validations, controller method
 #### Basic entities used
 
 - **User**
-  - *Attributes*
+  - **Attributes**
     - Name (string).
     - Email (string).
     - Password (string).
-  - Validations
+  - **Validations**
     - Name presence.
     - Email format and presence.
     - Password and password confirmation presence and length (at least 6).
